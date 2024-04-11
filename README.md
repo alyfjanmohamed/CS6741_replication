@@ -1,17 +1,17 @@
 # CS6741 Replication Project
-Trying to replicate Table 1 from DRONE: Data-aware Low-rank Compression for Large NLP Models
+Trying to replicate Table 1 from DRONE: Data-aware Low-rank Compression for Large NLP Models (below)
 ![image](https://github.com/alyfjanmohamed/CS6741_replication/assets/51303841/5e7dbfd4-e368-403c-a45f-a79144efcdef)
 
-My version of this table is below. Some benchmarks are missing because I did not have sufficient compute to evaluate them. In addition, each bechmark is only evaluated once (again due to computational limitations).
+My version of this table is below. Note, each bechmark is only evaluated once and some benchmarks are missing because I did not have sufficient compute to evaluate them. In addition, CoLA uses evaluation loss as the metric (instead of Matthew's correlation) since the output from the script I was using always gave a value of 0 for this.
 
 | Model    | RTE | CoLA | STS-B|  WNLI |
 | -------- | ------- | ------- | ------- | ------- |
 | TinyBERT  |  0.639   |  0.6029   |   0.8383  | 0.5634 |
-| Small |   0.6318   |  0.6155   |     |   0.3521  |
+| Small |   0.6318   |  0.6155   |   0.807  |   0.3521  |
 | Medium    |  0.6679   |   0.6052  |     |  0.5634   |
 | Int-expanded |  0.6462   |  0.6137   |     |   0.4789  |
 
-Note: CoLA uses evaluation loss as the metric (instead of Matthew's correlation since the output from the script I was using always gave a value of 0 for this).
+In the paper, the original model corresponds to ----. SVD corresponds to just applying SVD (and truncating rank) to each weight matrix while DRONE corresponds to the method proposed in the paper (effectively applying SVD to the weight matrix times a sample of inputs). DRONE retrain corresponds to fine-tuning the DRONE model.
 
 What is Original model?
 
