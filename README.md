@@ -41,7 +41,7 @@ The paper identifies that their methodology is successful because their DRONE ne
 I consulted ChatGPT to write some of the code in the notebooks.
 
 ### Final Project Plan
-Below are 3 paper references, the first one I presented in class
+Below are 4 paper references, the first one I presented in class
 1) [The Unreasonable Ineffectiveness of the Deeper Layers](https://arxiv.org/pdf/2403.17887.pdf)
 2) [ShortGPT: Layers in Large Language Models are More Redundant Than You Expect](https://arxiv.org/pdf/2403.03853.pdf)
 3) [Importance Estimation for Neural Network Pruning](https://openaccess.thecvf.com/content_CVPR_2019/papers/Molchanov_Importance_Estimation_for_Neural_Network_Pruning_CVPR_2019_paper.pdf)
