@@ -32,15 +32,21 @@ The reason for the int-expanded network was that the largest error between the f
 ![image](https://github.com/alyfjanmohamed/CS6741_replication/assets/51303841/2fefa718-ddc7-4657-8f54-0e2a7e30e9a1)
 
 ### Evaluation
-The paper identifies that their methodology is successful because their DRONE network has similar performance to the baseline (<3% difference). My medium model (which corresponds to the same level of rank reduction) shows similar results across the benchmarks. Therefore, I believe I was successful replicating their results from this table. In addition, I show that more aggressive rank reduction methods can preserve performance across some (but not all) benchmarks.
+The paper identifies that their methodology is successful because their DRONE network has similar performance to the baseline (<3% difference). My medium model (which corresponds to the same level of rank reduction) shows similar results across the benchmarks. Therefore, I believe I was successful replicating their results from this table. In addition, I show that more aggressive rank reduction methods can preserve performance across some (but not all) benchmarks. The benchmark that the smallest models struggle with the most, WNLI, is not reported in the original paper.
 
 ### Summary of Code
-1) Storing model inputs: To generate sample inputs to each layer, I used the [abokbot/wikipedia-first-paragraph](https://huggingface.co/datasets/abokbot/wikipedia-first-paragraph) dataset. I sample 5000 paragraphs and gave it to the model, storing 5000 randomly selected inputs for each layer. The code can be found in notebook XX
-2) Reducing rank of matrices: I followed the paper's procedure for finding low-rank representations for the weight matrices given the inputs saved from the previous section. The code can be found in notebook XX
-3) Evaluation: Finally, for evaluation, I used [run_glue.py](https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py) from huggingface. The code can be found in notebook XX
+1) Storing model inputs: To generate sample inputs to each layer, I used the [abokbot/wikipedia-first-paragraph](https://huggingface.co/datasets/abokbot/wikipedia-first-paragraph) dataset. I sample 5000 paragraphs and gave it to the model, storing 5000 randomly selected inputs for each layer. The code can be found in this [notebook](https://github.com/alyfjanmohamed/CS6741_replication/blob/main/tinyBERT_replication_1.ipynb)
+2) Reducing rank of matrices: I followed the paper's procedure for finding low-rank representations for the weight matrices given the inputs saved from the previous section. The code can be found in this [notebook](https://github.com/alyfjanmohamed/CS6741_replication/blob/main/tinyBERT_replication_2.ipynb)
+3) Evaluation: Finally, for evaluation, I used [run_glue.py](https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py) from huggingface. The code can be found in this [notebook](https://github.com/alyfjanmohamed/CS6741_replication/blob/main/project_evaluation.ipynb)
 I consulted ChatGPT to write some of the code in the notebooks.
 
 ### Final Project Plan
-Paper references (identify paper that was presented)
-1 Paragraph description
-1 experiment with action for positive / negative results
+Below are 3 paper references, the first one I presented in class
+1) [The Unreasonable Ineffectiveness of the Deeper Layers](https://arxiv.org/pdf/2403.17887.pdf)
+2) [ShortGPT: Layers in Large Language Models are More Redundant Than You Expect](https://arxiv.org/pdf/2403.03853.pdf)
+3) [Importance Estimation for Neural Network Pruning](https://openaccess.thecvf.com/content_CVPR_2019/papers/Molchanov_Importance_Estimation_for_Neural_Network_Pruning_CVPR_2019_paper.pdf)
+4) [Compressing Large Language Models by Streamlining the Unimportant Layer](https://arxiv.org/pdf/2403.19135.pdf)
+
+For my class project, I plan to investigate different methods for select layers to drop from an LLM. The paper I presented claims that almost 50% of layers can be dropped before performance on tasks is affected. I want to investigate 2 ways to improve on this paper: 1) better mechanism for selecting which layers to drop and 2) more thorough investigation of performance on benchmarks. For a better mechanism, I believe that a better metric can be found and that layers do not need to be removed sequentially. I plan to explore how dynamic programming and a greedy heuristic could be used for selecting layers to delete.
+
+An experiment that I plan to run is to take a large open-weights model and iteratively remove layers according to the new mechanism. For each model, I will fine-tune it on a specific task and then measure the performance. I will then plot how the model performs as its layers are removed. A positive result would be showing that performance on a variety of benchmarks does not decay as moderate (30-45%) of layers are removed. A negative result would be the rapid decay of performance as layers are removed.
