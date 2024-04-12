@@ -13,8 +13,8 @@ My version of this table is below. Note, each bechmark is only evaluated once an
 | -------- | ------- | ------- | ------- | ------- | ------- |
 | TinyBERT  |  0.639   |  0.6029   |   0.8383  | 0.5634 | 0.851 |
 | Small |   0.6318   |  0.6155   |   0.807  |   0.3521  | 0.809 |
-| Medium    |  0.6679   |   0.6052  |  0.8093   |  0.5634   |  |
-| Int-expanded |  0.6462   |  0.6137   |   0.8113  |   0.4789  | |
+| Medium    |  0.6679   |   0.6052  |  0.8093   |  0.5634   | 0.8439 |
+| Int-expanded |  0.6462   |  0.6137   |   0.8113  |   0.4789  | 0.8303 |
 
 In the paper, the original model corresponds to a pre-trained BERT model. SVD corresponds to just applying SVD (and truncating rank) to each weight matrix while DRONE corresponds to the method proposed in the paper (effectively applying SVD to the weight matrix times a sample of inputs). DRONE retrain corresponds to fine-tuning the DRONE model.
 #### Rank Selection Algorithm
@@ -34,10 +34,10 @@ The reason for the int-expanded network was that the largest error between the f
 ### Evaluation
 The paper identifies that their methodology is successful because their DRONE network has similar performance to the baseline (<3% difference). My medium model (which corresponds to the same level of rank reduction) shows similar results across the benchmarks. Therefore, I believe I was successful replicating their results from this table. In addition, I show that more aggressive rank reduction methods can preserve performance across some (but not all) benchmarks.
 
-### Summary of methods/code
-1) Storing model inputs: wikipedia paragraphs dataset, # paragraphs, # representations saved, code can be found in notebook XX
-2) Reducing rank of matrices: Using representations from part 1, iteratively fit the model, code can be found in notebook XX
-3) Evaluation: using run_glue.py from huggingface, code can be found in notebook XX
+### Summary of Code
+1) Storing model inputs: To generate sample inputs to each layer, I used the [abokbot/wikipedia-first-paragraph](https://huggingface.co/datasets/abokbot/wikipedia-first-paragraph) dataset. I sample 5000 paragraphs and gave it to the model, storing 5000 randomly selected inputs for each layer. The code can be found in notebook XX
+2) Reducing rank of matrices: I followed the paper's procedure for finding low-rank representations for the weight matrices given the inputs saved from the previous section. The code can be found in notebook XX
+3) Evaluation: Finally, for evaluation, I used [run_glue.py](https://github.com/huggingface/transformers/blob/main/examples/pytorch/text-classification/run_glue.py) from huggingface. The code can be found in notebook XX
 I consulted ChatGPT to write some of the code in the notebooks.
 
 ### Final Project Plan
